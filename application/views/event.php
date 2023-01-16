@@ -221,7 +221,7 @@ input:hover {
                     </div>
 
                     <div class="form-group mb-2">
-                        <label for="category" style="position: absolute;top: 15vh !important;">Add Multiple
+                        <label for="category" style="position: absolute;top: 10vh !important;">Add Multiple
                             Category</label>
                         <input type="text" id="#inputTag" value="" data-role="tagsinput" name="category" id="category"
                             autocomplete="off">
