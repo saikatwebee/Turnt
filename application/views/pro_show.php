@@ -181,10 +181,10 @@ input:hover {
                 <div id="pro-img">
                     <?php
                                 if($val->pro_img!=null || $val->pro_img!=''){
-                                    $img_src = base_url('assets/proshows/'.$val->pro_img);
+                                    $img_src = base_url('assets/proshow/'.$val->pro_img);
                                 }
                                 else{
-                                    $img_src = base_url('assets/proshows/default-pro.jpg');
+                                    $img_src = base_url('assets/proshow/default-pro.jpg');
                                 }
                             ?>
                     <img src="<?= $img_src ?>" alt="" id="pro-logo">

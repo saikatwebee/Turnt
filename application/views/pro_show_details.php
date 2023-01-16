@@ -54,7 +54,7 @@ body {
 
 .showcase {
     width: 100%;
-    height: 550px;
+    height: 95vh;
     position: relative;
     color: white;
     text-align: center;
@@ -71,7 +71,7 @@ body {
 
 .showcase .overlay {
     width: 100%;
-    height: 550px;
+    height: 95vh;
     /* background-color: rgba(0, 35, 82, 0.7); */
     background-color: rgb(0 35 82 / 80%);
     position: absolute;
@@ -89,10 +89,10 @@ body {
 
     <?php
         if($details->pro_img!=null || $details->pro_img!=''){
-            $img_src = base_url('assets/proshows/'.$details->pro_img);
+            $img_src = base_url('assets/proshow/'.$details->pro_img);
         }
         else{
-            $img_src = base_url('assets/proshows/default-pro.jpg');
+            $img_src = base_url('assets/proshow/default-pro.jpg');
         }
     ?>
 

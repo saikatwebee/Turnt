@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/Turnt/';
-$config['dir_website'] = 'C:/xamp/htdocs/Turnt/';
+$config['base_url'] = 'http://localhost/Mac/Turnt/';
+$config['dir_website'] = '/Applications/XAMPP/xamppfiles/htdocs/Mac/Turnt/';
 
 /*
 |--------------------------------------------------------------------------

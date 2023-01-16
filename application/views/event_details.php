@@ -87,7 +87,7 @@ body {
 
 .showcase {
     width: 100%;
-    height: 500px;
+    height: 95vh;
     position: relative;
     color: white;
     text-align: center;
@@ -104,7 +104,7 @@ body {
 
 .showcase .overlay {
     width: 100%;
-    height: auto;
+    height: 95vh;
     /* background-color: rgba(0, 35, 82, 0.7); */
     background-color: rgb(0 35 82 / 80%);
     position: absolute;
