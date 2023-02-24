@@ -116,6 +116,39 @@ class ProShow extends CI_Controller
         }
     }
 
+    public function getProDet(){
+        if($this->input->post() || $this->input->is_ajax_request()){
+            $pro_id = $this->input->post('pro_id');
+            $org_id = $this->session->userdata('user_id');
+            $res=$this->proshow_model->getProDetails($org_id,$pro_id);
+            if($res)
+            echo json_encode($res);
+        }
+    }
+
+    public function updateProshow(){
+       
+        if($this->input->post() || $this->input->is_ajax_request()){
+            $pro_id = $this->input->post('pro_id');
+            $org_id = $this->session->userdata('user_id');
+
+            $data['venue']=$this->input->post('venue');
+            $data['location']=$this->input->post('location');
+            $data['date']=$this->input->post('date');
+            $data['from_time']=$this->input->post('from_time');
+            $data['to_time']=$this->input->post('to_time');
+
+            $res=$this->proshow_model->updateProDetails($data,$pro_id);
+            // var_dump($res);
+            // die;
+            if($res){
+                $status=['code'=>200,'msg'=>'Update Successfull' ];
+                echo json_encode($status);
+            }
+        }
+    }
+
+
     public function addPro()
     {
         $role = $this->session->userdata('role');

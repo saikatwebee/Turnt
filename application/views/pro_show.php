@@ -99,7 +99,7 @@ h4 {
 .mini-btn {
     border-color: transparent !important;
     color: #fff !important;
-    font-size: 18px;
+    font-size: 11px;
     background: #e008a6;
     width: 50%;
     height: 40px;
@@ -199,7 +199,7 @@ input:hover {
                             if($role == 'P'){
                                 ?>
                     <div class="text-center mt-4">
-                        <button type="button" class="btn mini-btn" style="width:75%;" id="pro_register"
+                        <button type="button" class="btn mini-btn" style="width:85%;" id="pro_register"
                             onclick="window.location.href='<?= base_url('ProShow/details/'.$val->id) ?>'">Register <i
                                 class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
                     </div>
@@ -290,9 +290,7 @@ input:hover {
         </div>
     </div>
 </div>
-<script>
 
-</script>
 <script>
 function sub_pro() {
 
