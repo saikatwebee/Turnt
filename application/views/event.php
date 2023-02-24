@@ -74,7 +74,7 @@ h4 {
 .mini-btn {
     border-color: transparent !important;
     color: #fff !important;
-    font-size: 18px;
+    font-size: 11px;
     background: #e008a6;
     width: 50%;
     height: 40px;

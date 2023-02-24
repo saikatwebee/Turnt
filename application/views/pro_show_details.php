@@ -71,7 +71,7 @@ body {
 
 .showcase .overlay {
     width: 100%;
-    height: 95vh;
+    height: 110vh;
     /* background-color: rgba(0, 35, 82, 0.7); */
     background-color: rgb(0 35 82 / 80%);
     position: absolute;
@@ -136,7 +136,7 @@ body {
                     else if($this->session->userdata('role') == "O"){
                         ?>
                     <div class="text-center mb-3">
-                        <button type="button" class="btn small-btn pro_edit"><i class="fa fa-pencil"
+                        <button type="button" class="btn small-btn pro_edit"  value="<?= $this->uri->segment(3) ?>"><i class="fa fa-pencil"
                                 aria-hidden="true"></i> Edit</button>
                     </div>
                     <?php
@@ -147,3 +147,121 @@ body {
         </div>
     </section>
 </body>
+
+
+ <div class="modal fade" id="updatePro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Edit Proshow</h5>
+                <i class="fa fa-times" data-bs-dismiss="modal" aria-hidden="true"></i>
+            </div>
+            <div class="modal-body">
+                <form id="proshowForm" enctype="multipart/form-data">
+                <input type="hidden" name="pro_id" id="pro_id">
+
+                  
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" name="venue" id="venue" autocomplete="off"
+                            placeholder="Venue" style="color:#000 !important;">
+                        <label for="venue">Venue</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" name="location" id="location" autocomplete="off"
+                            placeholder="Location" style="color:#000 !important;">
+                        <label for="location">Location</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" name="date" id="datee" autocomplete="off"
+                            placeholder="Date" style="color:#000 !important;">
+                        <label for="date">Date</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="time" class="form-control" name="from_time" id="from_time" autocomplete="off"
+                            placeholder="From Time" style="color:#000 !important;">
+                        <label for="from_time">From Time</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="time" class="form-control" name="to_time" id="to_time" autocomplete="off"
+                            placeholder="To Time" style="color:#000 !important;">
+                        <label for="to_time">To Time</label>
+                    </div>
+                   
+                </form>
+            </div>
+            <div class="text-center mb-4">
+                <button type="button" class="btn btn-danger btn-custom" id="pro_edit" onclick="update_pro()"
+                    style="width:80%">Save <span style="float: right;font-size: 22px;padding-right: 10px;"><i
+                            class="fa fa-long-arrow-right" aria-hidden="true"></i></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).on("click",".pro_edit",()=>{
+      var pro_id =  $(".pro_edit").val();
+      $("#updatePro").modal('show');
+        $.ajax({
+            type:'post',
+            url:'<?= base_url('ProShow/getProDet') ?>',
+            data:{'pro_id':pro_id},
+            success:function(response){
+               var res = JSON.parse(response);
+               console.log(res.date);
+                $('[name="venue"]').val(res.venue);
+                $('[name="location"]').val(res.location);
+                $('[name="date"]').val(res.date);
+                $('[name="from_time"]').val(res.from_time);
+                $('[name="to_time"]').val(res.to_time);
+                $("#pro_id").val(res.id);
+            }
+        });
+    });
+
+    function update_pro(){
+        var formData =  $("#proshowForm").serializeArray();
+
+        $.ajax({
+            type:'post',
+            url:'<?=  base_url('ProShow/updateProshow') ?>',
+            data:formData,
+            beforeSend: function() {
+            $('#pro_edit').html('<i class="fa fa-spinner fa-spin" style="font-size:18px"></i>');
+            },
+            success:function(response){
+                if(response){
+                    var res = JSON.parse(response);
+               if(res.code==200){
+                $('#pro_edit').html('Save <span style="float: right;font-size: 22px;padding-right: 10px;"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>');
+                toasterOptions();
+                toastr.options.onHidden = function() {
+                    location.reload();
+                }
+                    toastr.success('ProShow Updated Successfully.', 'Successful');
+                }
+                }
+                else{
+                    $('#pro_edit').html('Save <span style="float: right;font-size: 22px;padding-right: 10px;"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>');
+                    toastr.warning('Please edit atleast one', 'Oops');
+                }
+               
+            }
+        });
+    }
+    
+
+     $(function() {
+        //$("#updatePro").modal('show');
+    $("#datee").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy/mm/dd'
+    });
+
+
+});
+   
+</script>

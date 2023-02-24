@@ -111,6 +111,70 @@ class Event extends CI_Controller
         }
     }
 
+    public function getEvent(){
+        if($this->input->post() || $this->input->is_ajax_request()){
+            $role = $this->session->userdata('role');
+            if ($role == 'O') {
+                $org_id = $this->session->userdata('user_id');
+                $event_id = $this->input->post('id');
+               // var_dump( $event_id );
+                $details=$this->event_model->getEventDetails($org_id,$event_id);
+                echo json_encode($details);
+            }
+        }
+    }
+
+    public function updateEvent(){
+        if($this->input->post() || $this->input->is_ajax_request()){
+            $role = $this->session->userdata('role');
+            if ($role == 'O') {
+                $org_id = $this->session->userdata('user_id');
+                $event_id = $this->input->post('event_id');
+                $data['venue']= $this->input->post('venue');
+                $data['location']= $this->input->post('location');
+                $data['date']= date('Y-m-d',strtotime($this->input->post('date')));
+                $data['event_time']= $this->input->post('event_time');
+                $res=$this->event_model->updateEvents($org_id,$event_id,$data);
+                if($res){
+                    $status=['code'=>200, 'msg'=>'Update Successfull'];
+                    echo json_encode($status);
+                }
+
+            }
+        }
+    }
+
+    public function getCat(){
+        if($this->input->post() || $this->input->is_ajax_request()){
+            $role = $this->session->userdata('role');
+            if ($role == 'O') {
+                $id = $this->input->post('id');
+                $event_id = $this->input->post('event_id');
+                $details=$this->event_model->getCatDetails($id,$event_id);
+                echo json_encode($details);
+
+            }
+    }
+}
+
+ public function updateCat(){
+    if($this->input->post() || $this->input->is_ajax_request()){
+        $role = $this->session->userdata('role');
+        if ($role == 'O') {
+            $id = $this->input->post('cat_id');
+            $event_id = $this->input->post('event_id');
+            $data['name'] = $this->input->post('name');
+            $res=$this->event_model->updateCatss($event_id,$id,$data);
+            if($res){
+                $status=['code'=>200, 'msg'=>'Update Successfull'];
+                echo json_encode($status);
+            }
+
+
+        }
+    }
+ }
+
     public function add_event(){
         //only for O
         $role = $this->session->userdata('role');

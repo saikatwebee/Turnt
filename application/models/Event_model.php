@@ -45,6 +45,37 @@ class Event_model extends CI_Model
         return $data;
     }
 
+    public function updateEvents($user_id,$id,$data){
+        $this->db->set($data);
+        $this->db->where('id',$id);
+        $this->db->where('user_id',$user_id);
+        $this->db->update('events');
+        if($this->db->affected_rows() > 0)
+        return true;
+    }
+
+    public function updateCatss($event_id,$id,$data){
+        $this->db->set($data);
+        $this->db->where('id',$id);
+        $this->db->where('event_id',$event_id);
+        $this->db->update('event_category');
+        if($this->db->affected_rows() > 0)
+        return true;
+    }
+    
+
+    public function getCatDetails($id,$event_id){
+        $res = $this->db
+            ->select('*')
+            ->where('id', $id)
+            ->where('event_id', $event_id)
+            ->get('event_category')
+            ->row();
+          
+                return $res;
+            
+    }
+
     public function getOrgByEventId($id)
     {
         $result = $this->db

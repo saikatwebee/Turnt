@@ -22,5 +22,12 @@ class Proshow_model extends CI_Model {
         $result = $this->db->select('*')->where(['id'=>$id,'user_id'=>$user_id])->get('proshows')->row();
         return $result;
     }
+    public function updateProDetails($data,$id){
+        $this->db->set($data);
+        $this->db->where(['id'=>$id]);
+        $this->db->update('proshows');
+        if($this->db->affected_rows() > 0)
+        return true;
+    }
 }
 ?>

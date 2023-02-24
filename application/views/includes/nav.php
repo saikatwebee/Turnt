@@ -208,7 +208,7 @@ a:hover{
     </div> -->
 
 
-
+<div class="overlay-chat"></div>
     <div class="ver2">
         <header>
             <div class="slide">
